@@ -1,23 +1,44 @@
- CREATE TABLE emp(
- empid VARCHAR2(10) PRIMARY KEY,
- empnameVARCHAR2(20),
- dob DATE,
- dept VARCHAR2(15),
- salary NUMBER(10,2)
- );
- INSERT INTO emp VALUES ('1', 'HARRIE', '06-JUN-2002',
- 'IT', 45000);
-INSERT INTO emp
- VALUES(:EMPID, :EMPNAME, :DOB, :DEPT, :SALARY);
- SELECT * FROM emp;
- SELECT empid, empname, salary FROM emp;
- SELECT * FROM empWHEREsalary>=30000;
- SELECT * FROM empWHEREempnameLIKE'H%';
- SELECT * FROM empWHEREdept='IT'ORDER BYsalary;
- SELECT * FROM empORDERBYsalary DESC;
- UPDATE empSETdept='ACCOUNTS' WHERE empid=1;
- UPDATE empSETsalary = salary + 500;
- UPDATE empSETdept='ACCOUNTS', salary = 33000
- WHEREempid=3;
- DELETE FROM empWHEREempid=6;
- DELETE FROM emp;
+-- Create the employee table
+CREATE TABLE emp (
+    empid VARCHAR2(10) PRIMARY KEY,
+    empname VARCHAR2(20),
+    dob DATE,
+    dept VARCHAR2(15),
+    salary NUMBER(10, 2)
+);
+
+-- Insert a record into the employee table
+INSERT INTO emp VALUES ('1', 'HARRIE', TO_DATE('06-JUN-2002', 'DD-MON-YYYY'), 'IT', 45000);
+
+-- Insert using bind variables
+INSERT INTO emp VALUES (:EMPID, :EMPNAME, TO_DATE(:DOB, 'DD-MON-YYYY'), :DEPT, :SALARY);
+
+-- Select all employees
+SELECT * FROM emp;
+
+-- Select specific columns
+SELECT empid, empname, salary FROM emp;
+
+-- Select employees with salary greater than or equal to 30000
+SELECT * FROM emp WHERE salary >= 30000;
+
+-- Select employees whose name starts with 'H'
+SELECT * FROM emp WHERE empname LIKE 'H%';
+
+-- Select employees from the IT department, ordered by salary
+SELECT * FROM emp WHERE dept = 'IT' ORDER BY salary;
+
+-- Update department for employee with empid 1
+UPDATE emp SET dept = 'ACCOUNTS' WHERE empid = '1';
+
+-- Update salary by adding 500 to existing salary
+UPDATE emp SET salary = salary + 500;
+
+-- Update department and salary for employee with empid 3
+UPDATE emp SET dept = 'ACCOUNTS', salary = 33000 WHERE empid = '3';
+
+-- Delete employee with empid 6
+DELETE FROM emp WHERE empid = '6';
+
+-- Delete all records from the employee table
+DELETE FROM emp;
