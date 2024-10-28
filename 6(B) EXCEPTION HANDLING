@@ -1,0 +1,23 @@
+ CREATE TABLE emp(
+ empid NUMBERPRIMARYKEY,
+ empnameVARCHAR2(20),
+ dob DATE,
+ dept VARCHAR2(20),
+ salary NUMBER(10, 2)
+ );
+ DECLARE
+ e_idemp.empid%type;
+ e_nameemp.empname%type;
+ e_deptemp.dept%type;
+ BEGIN
+ e_id :=:e_id;
+ SELECT empname, dept INTO e_name, e_dept FROM
+ empWHEREempid=e_id;
+ DBMS_OUTPUT.PUT_LINE ('Emp Name: '|| e_name);
+ DBMS_OUTPUT.PUT_LINE ('Department: ' || e_dept);
+ EXCEPTION
+ WHENno_data_found THEN
+ dbms_output.put_line('No such Employee!');
+ WHENothers THEN
+dbms_output.put_line('Error!');
+ END;
