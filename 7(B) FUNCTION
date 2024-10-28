@@ -1,23 +1,33 @@
- CREATE ORREPLACE FUNCTION findMax(x IN NUMBER,
- y IN NUMBER)RETURNNUMBER
- IS
- Z NUMBER;
- BEGIN
- IF x > yTHEN
- Z := x;
- ELSE
- Z := y;
- ENDIF;
- RETURN Z;
- END;
- /
- DECLARE
- a NUMBER;
- b NUMBER;
- c NUMBER;
- BEGIN
- c := findMax(a, b);
- DBMS_OUTPUT.PUT_LINE('Maximum of ' || a || ' and
- ' || b || ' is ' || c);
+CREATE OR REPLACE PROCEDURE summul(
+    x IN NUMBER,
+    y IN NUMBER,
+    s OUT NUMBER,
+    p OUT NUMBER
+) IS
+    k NUMBER;  -- Variable for sum
+    l NUMBER;  -- Variable for product
+BEGIN
+    k := x + y;  -- Calculate sum
+    l := x * y;  -- Calculate product
+    s := k;      -- Assign sum to OUT parameter
+    p := l;      -- Assign product to OUT parameter
 END;
- /
+/
+
+
+SET SERVEROUTPUT ON;  -- Ensure that output is displayed
+
+DECLARE
+    a NUMBER := 5;  -- Initialize x
+    b NUMBER := 10; -- Initialize y
+    c NUMBER;       -- Variable for sum (OUT parameter)
+    d NUMBER;       -- Variable for product (OUT parameter)
+BEGIN
+    -- Call the procedure
+    summul(a, b, c, d);
+    
+    -- Output the results
+    DBMS_OUTPUT.PUT_LINE('Sum: ' || c);
+    DBMS_OUTPUT.PUT_LINE('Product: ' || d);
+END;
+/
