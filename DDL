@@ -1,0 +1,13 @@
+ Create table employee ( empid varchar(10) primary key,
+ empnamevarchar2(20), gender varchar2(7), age
+ number(3) check (age>18), dept varchar(15), dob date,
+ doj date);
+ alter table employee add (designation varchar2 (15));
+ alter table employee add email varchar2 (25);
+ alter table employee add(phoneno number(10) unique);
+ alter table employee modify (empname varchar2(5));
+ alter table employee drop column email;
+ create table temp (c1 char(10),c2 number(3));
+ drop table temp;
+ rename employee to empl;
+ truncate table empl;
