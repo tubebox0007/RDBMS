@@ -1,0 +1,44 @@
+1. Create Table student_22h208
+CREATE TABLE student_22h208 (
+    rollno VARCHAR2(8) PRIMARY KEY,
+    sname VARCHAR2(20),
+    dept VARCHAR2(20),
+    dob DATE,
+    phoneo NUMBER(10)
+);
+2. Describe Table Structure
+DESC student_22h208;
+3. Insert Student Record with Bind Variables
+INSERT INTO student_22h208 VALUES (:rollno, :sname, :dept, :dob, :phoneo);
+4. Select All Students
+SELECT * FROM student_22h208;
+5. Create Table marksheet_22G313
+CREATE TABLE marksheet_22h208(
+    rno VARCHAR2(8) REFERENCES student_22h208(rollno),
+    m1 NUMBER(3),
+    m2 NUMBER(3),
+    m3 NUMBER(3),
+    m4 NUMBER(3),
+    m5 NUMBER(3),
+    Total NUMBER(3),
+    Average NUMBER(8, 2),
+    result CHAR(5)
+);
+6. Insert Marksheet Record with Bind Variables
+INSERT INTO marksheet_22h208VALUES (:rno, :m1, :m2, :m3, :m4, :m5, :Total, :Average, :result);
+7. Select All Marksheet Records
+SELECT * FROM marksheet_22G313;
+8. Update Total Marks
+UPDATE marksheet_22h208SET Total = m1 + m2 + m3 + m4 + m5;
+9. Update Average Marks
+UPDATE marksheet_22h208SET Average = (Total / 5);
+10. Update Result to 'PASS'
+UPDATE marksheet_22h208SET result = 'PASS' WHERE m1 >= 40 AND m2 >= 40 AND m3 >= 40 AND m4 >= 40 AND m5 >= 40;
+11. Update Result to 'FAIL'
+UPDATE marksheet_22h208SET result = 'FAIL' WHERE m1 < 40 OR m2 < 40 OR m3 < 40 OR m4 < 40 OR m5 < 40;
+12. Select All Marksheet Records After Updates
+SELECT * FROM marksheet_22G313;
+13. Select Students Who Passed
+SELECT * FROM marksheet_22h208WHERE result = 'PASS';
+14. Select Passed Students Ordered by Average
+SELECT * FROM marksheet_22h208WHERE result = 'PASS' ORDER BY Average DESC;
