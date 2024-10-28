@@ -1,36 +1,49 @@
-CREATE TABLE emp (
+EX 1 :DDL Commands
+1. Create Table empl
+CREATE TABLE empl (
     empid VARCHAR2(10) PRIMARY KEY,
     empname VARCHAR2(20),
+    gender VARCHAR2(7),
+    age NUMBER(3) CHECK (age > 18),
+    dept VARCHAR(15),
     dob DATE,
-    dept VARCHAR2(15),
-    salary NUMBER(10,2)
+    doj DATE
 );
-
-drop table emp
-
-desc emp
-
-INSERT INTO emp VALUES ('1', 'HARRIE', TO_DATE('06-JUN-2002', 'DD-MON-YYYY'), 'IT', 45000);
-
-SELECT * FROM emp;
-
-SELECT empid, empname, salary FROM emp;
-
-SELECT * FROM emp WHERE salary >= 30000;
-
-SELECT * FROM emp WHERE empname LIKE 'H%';
-
-SELECT * FROM emp WHERE dept = 'IT' ORDER BY salary;
-
-SELECT * FROM emp ORDER BY salary DESC;
-
-UPDATE emp SET dept = 'ACCOUNTS' WHERE empid = '1';
-
-UPDATE emp SET salary = salary + 500;
-
-UPDATE emp SET dept = 'ACCOUNTS', salary = 33000 WHERE empid = '3';
-
-DELETE FROM emp WHERE empid = '6';
-
-
-DELETE FROM emp;
+2. Describe empl
+DESC empl;
+3. Create Table salary
+CREATE TABLE salary1 (
+    empid VARCHAR2(10) REFERENCES empl(empid),
+    salary NUMBER(10),
+    dept VARCHAR(15),
+    branch VARCHAR2(20)
+);
+.
+4. Describe salary_22g313
+DESC salary1;
+5. Add Designation
+ALTER TABLE empl ADD (designation VARCHAR2(15));
+6. Add Email
+ALTER TABLE empl ADD email VARCHAR2(25);
+7. Add Phone Number
+ALTER TABLE empl ADD (phono NUMBER(10) UNIQUE);
+8. Modify empname Column
+ALTER TABLE empl MODIFY (empname VARCHAR2(5));
+9. Rename Column empname to ename
+ALTER TABLE empl RENAME COLUMN empname TO ename;
+10. Drop Email Column
+ALTER TABLE empl DROP COLUMN email;
+11. Rename Table
+RENAME empl TO empl_22g313;
+12. Create Temporary Table
+CREATE TABLE temp (c1 CHAR(10), c2 NUMBER(3));
+13. Describe Temporary Table
+DESC temp;
+14. Drop Temporary Table
+DROP TABLE temp;
+15. Describe After Drop
+DESC temp;
+16. Truncate Table
+TRUNCATE TABLE empl;
+17. Rename Table
+RENAME empl TO emp;
