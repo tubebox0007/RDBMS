@@ -1,0 +1,31 @@
+ CREATE TABLE emp_cursor (
+ eno NUMBER(5) PRIMARY KEY,
+ bp NUMBER(8),
+ hra NUMBER(7),
+ da NUMBER(7),
+ tax NUMBER(7),
+ pf NUMBER(7),
+ net NUMBER(10)
+ );
+ Declare
+ Cursor empcursor is select eno,bp,hra,da,tax,pf,net from
+ emp_cursor;
+ enemp_cursor.eno%type;
+ b emp_cursor.bp%type;
+ h emp_cursor.hra%type;
+ demp_cursor.da%type;
+ temp_cursor.tax%type;
+ pemp_cursor.pf%type;
+ nemp_cursor.net%type;
+ begin
+ open empcursor;
+ loop
+ fetch empcursor into en,b,h,d,t,p,n;
+if emp cursor%NOTFOUND then
+ exit;
+ end if;
+ n:=b+h+d-(t+p);
+ update emp_cursor set Net=n where eno=en;
+ end loop;
+ close empcursor;
+ end;
