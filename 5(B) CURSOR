@@ -1,0 +1,38 @@
+ CREATE TABLE ebbill (
+ cno VARCHAR(20) PRIMARY KEY,
+ p_unit NUMBER(10, 2),
+ c_unit NUMBER(10, 2),
+ totunits NUMBER(10, 2),
+ amt NUMBER(10, 2)
+ );
+ INSERT INTO ebbill VALUES
+ (:CNO, :P_UNIT, :C_UNIT, :TOTUNITS, :AMT);
+Declare
+ cursor ebcursor is select cno,p_unit,c_unit,totunits,amt
+ from ebbill;
+ cn1 ebbill.cno%type;
+ pu ebbill.p_unit%type;
+ cu ebbill.c_unit%type;
+ tu ebbill.totunits%type;
+ tamt ebbill.amt%type;
+ Begin
+ open ebcursor;
+ loop
+ fetch ebcursor into cn1,pu,cu,tu,tamt;
+ if ebcursor%NOTFOUND then
+ exit;
+ end if;
+ tu:=cu-pu;
+ iftu<=100 then
+ tamt:=0;
+ elsiftu>100 and tu<=200 then
+ tamt:=tu*3.00;
+ elsiftu>200 and tu<=300 then
+ tamt:=tu*4.00;
+ else
+ tamt:=tu*5.00;
+ end if;
+ update ebbill set totunits=tu,amt=tamt where cno=cn1;
+ end loop;
+ close ebcursor;
+ end;
