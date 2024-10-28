@@ -1,0 +1,16 @@
+ Declare
+ dividend number;
+ divisor number;
+ result number;
+ div_by_zero EXCEPTION;
+ Begin
+ dividend:=:div1;
+ divisor:=:div2;
+ if divisor=0 then
+ raise div_by_zero;
+ end if;
+ result:=dividend/divisor;
+ dbms_output.put_line('Result='||result);
+ exception when div_by_zero then
+ dbms_output.put_line('Divisor is zero');
+ End;
