@@ -1,0 +1,23 @@
+ CREATE ORREPLACE FUNCTION findMax(x IN NUMBER,
+ y IN NUMBER)RETURNNUMBER
+ IS
+ Z NUMBER;
+ BEGIN
+ IF x > yTHEN
+ Z := x;
+ ELSE
+ Z := y;
+ ENDIF;
+ RETURN Z;
+ END;
+ /
+ DECLARE
+ a NUMBER;
+ b NUMBER;
+ c NUMBER;
+ BEGIN
+ c := findMax(a, b);
+ DBMS_OUTPUT.PUT_LINE('Maximum of ' || a || ' and
+ ' || b || ' is ' || c);
+END;
+ /
