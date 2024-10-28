@@ -1,0 +1,26 @@
+ CREATE ORREPLACE PROCEDURE summul(
+ x IN NUMBER,
+ y IN NUMBER,
+ s OUTNUMBER,
+ p OUTNUMBER
+ ) IS
+ k NUMBER;
+ l NUMBER;
+ BEGIN
+ k := x + y;
+ l := x * y;
+ s := k;
+ p := l;
+ END;
+ /
+ DECLARE
+ a NUMBER;
+ b NUMBER;
+ c NUMBER;
+ d NUMBER;
+ BEGIN
+ summul(a, b, c, d);
+ DBMS_OUTPUT.PUT_LINE('Sum: ' || c);
+ DBMS_OUTPUT.PUT_LINE('Product: ' || d);
+END;
+ /
