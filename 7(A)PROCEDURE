@@ -1,26 +1,36 @@
- CREATE ORREPLACE PROCEDURE summul(
- x IN NUMBER,
- y IN NUMBER,
- s OUTNUMBER,
- p OUTNUMBER
- ) IS
- k NUMBER;
- l NUMBER;
- BEGIN
- k := x + y;
- l := x * y;
- s := k;
- p := l;
- END;
- /
- DECLARE
- a NUMBER;
- b NUMBER;
- c NUMBER;
- d NUMBER;
- BEGIN
- summul(a, b, c, d);
- DBMS_OUTPUT.PUT_LINE('Sum: ' || c);
- DBMS_OUTPUT.PUT_LINE('Product: ' || d);
+-- Create or replace the procedure
+CREATE OR REPLACE PROCEDURE summul (
+    x IN NUMBER,
+    y IN NUMBER,
+    s OUT NUMBER,
+    p OUT NUMBER
+) IS
+    k NUMBER;  -- Variable to store sum
+    l NUMBER;  -- Variable to store product
+BEGIN
+    k := x + y;  -- Calculate sum
+    l := x * y;  -- Calculate product
+    s := k;      -- Assign sum to OUT parameter
+    p := l;      -- Assign product to OUT parameter
 END;
- /
+/
+
+SELECT * FROM user_procedures WHERE object_name = 'SUMMUL';
+
+
+
+
+DECLARE
+    a NUMBER := 5;  -- Initialize input value for x
+    b NUMBER := 10; -- Initialize input value for y
+    c NUMBER;       -- Variable to hold the sum
+    d NUMBER;       -- Variable to hold the product
+BEGIN
+    -- Call the procedure
+    summul(a, b, c, d);
+    
+    -- Output the results
+    DBMS_OUTPUT.PUT_LINE('Sum: ' || c);
+    DBMS_OUTPUT.PUT_LINE('Product: ' || d);
+END;
+/
